@@ -1,4 +1,4 @@
-#AngularJS - ES6 - Starter
+#AngularJS - ES6 - WebPack - Starter
 
 This project is a minimal AngularJS 1.x application built with ECMAScript classes.
 It was primarily created to test the feasibilty of using ES6 with ANgularJS in production code.
