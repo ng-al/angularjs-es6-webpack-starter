@@ -1,7 +1,7 @@
 #AngularJS - ES6 - WebPack - Starter
 
 This project is a minimal AngularJS 1.x application built with ECMAScript classes.
-It was primarily created to test the feasibilty of using ES6 with ANgularJS in production code.
+It was primarily created to test the feasibility of using ES6 classes with AngularJS in production code.
 The *test* was successful, thus I am sharing the code so that other developers can develop with "objective Angular".
 
 The project uses webpack which performs two functions: Babel transpiling, and module loading.
