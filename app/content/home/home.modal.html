@@ -1,0 +1,29 @@
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>I like It!</h3>
+    </div>
+    <form name="form" role="form" ng-submit="vm.submit(form.$valid)">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="email">Email address:</label>
+                <input id="email" name="email" type="email" class="form-control" ng-model="vm.email" required>
+            </div>
+            <div class="form-group">
+                <label>Name:</label>
+                <div>
+                    <input id="firstName" name="firstName" type="text" placeholder="first" style="float:left;width:272px" ng-model="vm.firstName">
+                    <input id="lastName" name="lastName" type="text" placeholder="last" style="float:right;width:272px" ng-model="vm.lastName" required>
+                </div>
+            </div>
+            <div style="clear: both"></div><br />
+            <div class="form-group">
+                <label for="comments">Comments:</label>
+                <textarea class="form-control" id="comments" name="comments" rows="6" ng-model="vm.comments"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,25 @@
+<div>
+    <h1>Start Up</h1>
+
+    <p>
+        When a webpack application starts, the initial template and corresponding code file are loaded.
+    </p>
+    <p>
+        The template <code>/app/index.html</code> is very minimal. None of the usual style or script loading is present;
+        instead, those items are loaded vie <em>require</em> statements within the code.
+        Also note, that the <code>ng-app</code> directive is missing, AngularJS bootstrapping is handled in code.
+        The only AngularJS directives in index.html is <code>left-nav</code> and <code>ng-view</code>.
+    </p>
+    <p>
+        The startup code in <code>/app/index.es6</code> is responsible for bootstrapping the entire application:
+        <ol>
+            <li>The bootstrap and font-awesome CSS are loaded.</li>
+            <li>AngularJS is loaded.</li>
+            <li>
+                <code>/app/main/main.es6</code> is imported, this initializes the module.
+                See <a href="#main">Main</a>.
+            </li>
+            <li>Lastly, AngularJS is attached to the <code>&lt;body&gt;</code> tag.</li>
+        </ol>
+    </p>
+</div>

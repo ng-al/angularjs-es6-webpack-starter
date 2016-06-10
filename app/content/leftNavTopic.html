@@ -1,0 +1,53 @@
+<div>
+    <h1>LeftNav</h1>
+
+    <p>
+        <code>/app/leftNav/leftNav.feature.es6</code> is the "main" file for the left navigation feature.
+        By importing this file, the feature will be set up. This file performs the following tasks:
+        <ol>
+            <li>Imports the stylesheet for the feature.</li>
+            <li>Imports the leftNav module. (This creates it.)</li>
+            <li>Imports the leftNav component (directive).</li>
+            <li>Registers the leftNav component with the leftNav module.</li>
+        </ol>
+    </p>
+    <p>
+        <code>/app/leftNav/leftNav.component.es6</code> is the leftNav Angular directive. It is written in <em>component-style</em>,
+        which simply means that the directive uses a separate template and controller.
+        The component's file has a controller class defined at the top, and the directive class at the bottom.
+        (The template is in a separate file <code>/app/leftNav/leftNav.html</code> and is included by the <code>require</code>
+        statement on line 46.
+    </p>
+
+    <h3>The LeftNav Directive</h3>
+    <p>
+        Note that the "normal" directive API properties are defined as properties of the class instance.
+        The link function (not used in this example), is similarly defined.
+        The controller is associated with the directive on line 41 and 42.  If you examine the template, you will see that all of
+        the view model properties (defined by the controller), are referenced in the template with the prefix <em>vm.</em>
+    </p>
+    <p>
+        <code>this.scope = false</code><br />
+        Since all of the work is performed in the controller, there is no need to create an isolated scope for the directive.
+        Note that when you do not create a scope, the <code>scope</code> parameter in the link function is the parent element's scope.
+    </p>
+    <p>
+        <code>this.bindToController = {}</code><br />
+        This creates an isolated scope for the controller.
+        Note that any properties created in this object will be present in the controller as properties on the <code>$scope</code>
+        object.
+    </p>
+
+    <h3>The LeftNav Controller</h3>
+    <p>
+        The routing service is used to get the array of routing items.
+        This collection is added to the view model so that the template can perform an <code>ng-repeat</code> over the data.
+    </p>
+    <p>
+        A watch is placed on <code>$location.path()</code> so that whenever the path changes, the <code>activeTabIndex</code>
+        will be set.
+    </p>
+    <p>
+        <code>onTabClick()</code> is called whenever a user clicks one of the "pills."
+    </p>
+</div>

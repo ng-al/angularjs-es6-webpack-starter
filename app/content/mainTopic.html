@@ -1,0 +1,18 @@
+<div>
+    <h1>Main</h1>
+
+    <p>
+        <code>/app/main</code> creates the application Angular module and "global" assets.
+        Everything is setup as a consequence of <code>import "main.es6"</code>
+    </p>
+    <p>
+        <code>main.es6</code> performs the following tasks:
+        <ol>
+            <li>Imports the top-level stylesheet.  Note that <code>main.less</code> imports the variables from bootstrap.</li>
+            <li>Imports <code>ngRoute</code> and <code>tabs</code> from the installed <code>node_modules</code>.</li>
+            <li>Imports the routing config block, the routing provider, and the <a href="#leftNav">left navigation component</a> from their respective files.</li>
+            <li>Builds the application module, injecting <code>ngRoute</code>, bootstrap UI tabs, and the left nav feature.</li>
+            <li>Registers the routing config block and the routing provider with the module.</li>
+        </ol>
+    </p>
+</div>

@@ -1,0 +1,41 @@
+<div ng-controller="homeCtrl as vm">
+    <h1><i class="fa fa-info" aria-hidden="true"></i>Overview</h1>
+
+    <div class="button-bar">
+        <button type="button" class="btn btn-lg btn-primary-outline" ng-click="vm.openModal()"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>like it?</button></div>
+    <p>
+        This Angular starter project uses:
+        <ul>
+            <li>AngularJS 1.x</li>
+            <li>angular-route</li>
+            <li>angular-ui-bootstrap</li>
+            <li>Bootstrap CSS 3.x</li>
+            <li>Font Awesome</li>
+            <li>LESS</li>
+        </ul>
+
+        The Javascript is written using ECMAScript 6; the babel transpiler is used.
+        All of the parts are packaged by webpack.  This allows the use of <em>import</em>, <em>export</em>, and <em>require</em>.
+    </p>
+    <p>
+        Refer to the other tabs to see how this starter app works.
+    </p>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="item in items">
+                <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+            </li>
+        </ul>
+        Selected: <b>{{ selected.item }}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

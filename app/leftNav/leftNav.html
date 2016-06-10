@@ -1,0 +1,5 @@
+<div class="left-nav text-info">
+    <uib-tabset type="pills" active="vm.activeTabIndex" vertical="true">
+        <uib-tab index="item.ordinal" heading="{{item.label}}" ng-repeat="item in vm.routing" ng-click="vm.onTabClick(item)"></uib-tab>
+    </uib-tabset>
+</div>

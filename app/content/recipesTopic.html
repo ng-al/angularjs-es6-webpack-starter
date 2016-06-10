@@ -1,0 +1,39 @@
+<div>
+    <h1>Module Recipes (Factory Methods)</h1>
+
+    <p>
+        In this app we are using the inline injector form to register all of the different parts of an Angular application.
+        The form of an inline injector is <code>["inject1", "inject2", ..., constructorFn]</code> where the constructor
+        function has a corresponding parameter for each injected resource.
+    </p>
+    <p>
+        In order to use an ECMAScript class constructor as an Angular component, we use the following form:
+    </p>
+    <p>
+        <code>
+            class MyAngularComponent { <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;static get name() { return "myAngularComponent"; } <br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;constructor(inject1, inject2) { <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;} <br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;static factory(inject1, inject2) { return new MyAngularComponent(inject1, inject2); } <br />
+            } <br /><br />
+            MyAngularComponent.$inject = ["inject1", "inject2", MyAngularComponent.factory];
+        </code>
+    </p>
+    <p>
+        This pattern works for all recipe types.  Assume that the preceding class represents a factory service.
+        Then to register the "service" with a module:
+    </p>
+    <p>
+        <code>
+            angular.module("myModule").factory(MyAngularComponent.name, MyAngularComponent.$inject);
+        </code>
+    </p>
+    <p>
+        Note: &nbsp;If you are using the service rather than the factory recipe, the following changes should be made:
+        <ul>
+            <li>You do not need the static factory function.</li>
+            <li>The last item within the injection array should be a reference to the class.</li>
+        </ul>
+    </p>
+</div>
