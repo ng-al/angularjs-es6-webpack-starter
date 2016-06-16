@@ -1,6 +1,7 @@
 // Copyright (c) Alvin Pivowar 2016
 
 class HomeModalController {
+    /*@ngInject*/
     constructor($uibModalInstance, $window) {
         this._$uibModalInstance = $uibModalInstance;
         this._$window = $window;
@@ -32,10 +33,6 @@ class HomeModalController {
         this._$window.open(`mailto:alvin@ng-al.com?I%20Like%20It!&body=${this.buildEmailBody()}`, "_self");
         this.ok();
     }
-
-    static factory($uibModalInstance, $window) { return new HomeModalController($uibModalInstance, $window); }
 }
-
-HomeModalController.$inject = ["$uibModalInstance", "$window", HomeModalController.factory];
 
 export default HomeModalController;

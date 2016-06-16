@@ -1,6 +1,9 @@
 // Copyright (c) Alvin Pivowar 2016
 
+import theApp from "./main.module.es6";
 import RoutingItem from "./routingItem.model.es6";
+import {injectForES6} from "../common.es6";
+
 
 let index = 0;
 const routingInfo = [
@@ -12,7 +15,9 @@ const routingInfo = [
     new RoutingItem(index++, "Recipes", "/recipes", require("../content/recipesTopic.html"))
 ];
 
+
 class RoutingService {
+    /*@ngInject*/
     constructor($q) {
         this._$q = $q;
     }
@@ -22,25 +27,17 @@ class RoutingService {
             accept({ data: routingInfo });
         });
     }
-
-    static factory($q) { return new RoutingService($q); }
 }
-
-RoutingService.$inject = ["$q", RoutingService.factory];
 
 
 class RoutingProvider {
-    static get name() { return "routingService"; }
-
+    /*@ngInject*/
     constructor() {
         this.routingInfo = routingInfo;
     }
 
-    get $get() { return RoutingService.$inject; }
-
-    static factory() { return new RoutingProvider(); }
+    get $get() { return injectForES6(RoutingService); }
 }
 
-RoutingProvider.$inject = [RoutingProvider.factory];
-
+theApp.provider("routingService", injectForES6(RoutingProvider));
 export default RoutingProvider;

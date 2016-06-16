@@ -1,25 +1,23 @@
 // Copyright (c) Alvin Pivowar 2016
 
+import theApp from "../../main/main.module.es6";
 import HomeModalController from "./home.modal.controller.es6";
+import {injectForES6} from "../../common.es6";
 
 class HomeController {
-    static get name() { return "homeCtrl"; }
-
+    /*@ngInject*/
     constructor($uibModal) {
         this._$uibModal = $uibModal;
     }
 
     openModal() {
         this._$uibModal.open({
-            controller: HomeModalController.$inject,
+            controller: injectForES6(HomeModalController),
             controllerAs: "vm",
             templateUrl: require("./home.modal.html")
         });
     }
-
-    static factory($uibModal) { return new HomeController($uibModal); }
 }
 
-HomeController.$inject = ["$uibModal", HomeController.factory];
-
+theApp.controller("homeCtrl", injectForES6(HomeController));
 export default HomeController;

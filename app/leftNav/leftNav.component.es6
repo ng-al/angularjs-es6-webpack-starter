@@ -1,6 +1,11 @@
 // Copyright (c) Alvin Pivowar 2016
 
+import module from "./leftNav.module.es6";
+import {injectForES6} from "../common.es6";
+
+
 class LeftNavController {
+    /*@ngInject*/
     constructor($location, $scope, routingService) {
         this._$location = $location;
         this.activeTabIndex = null;
@@ -22,20 +27,14 @@ class LeftNavController {
     onTabClick(item) {
         this._$location.path(item.route);
     }
-
-    static factory($location, $scope, routingService) { return new LeftNavController($location, $scope, routingService); }
 }
-
-LeftNavController.$inject = ["$location", "$scope", "routingService", LeftNavController.factory];
-
 
 
 class LeftNav {
-    static get name() { return "leftNav"; }
-
+    /*@ngInject*/
     constructor() {
         this.bindToController = {};
-        this.controller = LeftNavController.$inject;
+        this.controller = injectForES6(LeftNavController);
         this.controllerAs = "vm";
         this.replace = true;
         this.restrict = 'E';
@@ -45,10 +44,7 @@ class LeftNav {
 
     link(scope, elem, attrs) {
     }
-
-    static factory() { return new LeftNav(); }
 }
 
-LeftNav.$inject = [LeftNav.factory];
-
+module.directive("leftNav", injectForES6(LeftNav));
 export default LeftNav;

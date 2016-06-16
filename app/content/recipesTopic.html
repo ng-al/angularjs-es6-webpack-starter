@@ -7,7 +7,7 @@
         function has a corresponding parameter for each injected resource.
     </p>
     <p>
-        In order to use an ECMAScript class constructor as an Angular component, we use the following form:
+        In order to use an ECMAScript class constructor as an Angular component, we <em>could</em> use the following verbose form:
     </p>
     <p>
         <code>
@@ -29,11 +29,38 @@
             angular.module("myModule").factory(MyAngularComponent.name, MyAngularComponent.$inject);
         </code>
     </p>
+    <h3>Simplification</h3>
     <p>
-        Note: &nbsp;If you are using the service rather than the factory recipe, the following changes should be made:
-        <ul>
-            <li>You do not need the static factory function.</li>
-            <li>The last item within the injection array should be a reference to the class.</li>
-        </ul>
+        One problem with this pattern, is that the parameter list for the recipe is in three places: the constructor function,
+        the factory function, and the injection array. This starter app uses a technique where the parameter list need only be specified once.
+    </p>
+    <h4>ng-annotate-loader</h4>
+    <p>
+        We are using a webpack loader that will automatically build the $inject static property on a class that is <em>annotated.</em>
+        To annotate a constructor for injection, precede the constructor with a special comment:  <strong>/*@ngInject*/</strong>
+    </p>
+    <p>
+        Normally, if a constructor function has a <strong>$inject</strong> property, then Angular can construct the object directly from the constructor.
+        However, (unfortunately) this does not work with ECMAScript classes. The reason is that Angular calls the constructor via
+        fn.apply(), and ES6 prohibits (with an internal type error) an attempt to build a class without using <strong>new</strong>.
+    </p>
+    <p>
+        So, even if you use annotation, you still need a factory function. The factory function itself can be simplified using new
+        syntax available in ES6: <br /><br />
+        <code>
+            get $get() { return (...args) => new <em>constructorName</em>(...args); }
+        </code> <br /><br />
+        Since the constructor name varies per class, you would have to still add this function to each class.
+    </p>
+    <h4>Another Issue</h4>
+    <p>
+    The annotation loader builds the injection array, but we need the (callable) factory function appended to each injection array.
+    You could add another line of code (per class) to do this.
+    </p>
+
+    <h3>The starter solution</h3>
+    <p>
+        To automate all that has been mentioned above, the starter app uses the annotation loader in conjunction with a <em>helper</em>
+        that transforms the injection array into a form that will work with ES6 classes. You can find this helper in <code>/app/common.es6</code>
     </p>
 </div>

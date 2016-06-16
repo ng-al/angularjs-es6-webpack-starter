@@ -5,5 +5,5 @@ import "font-awesome/css/font-awesome.css";
 
 import "angular";
 
-import theApp from "./main/main.es6";
+import theApp from "./main/main.feature.es6";
 angular.bootstrap(document.body, [theApp.name]);
