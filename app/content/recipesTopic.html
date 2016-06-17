@@ -48,7 +48,7 @@
         So, even if you use annotation, you still need a factory function. The factory function itself can be simplified using new
         syntax available in ES6: <br /><br />
         <code>
-            get $get() { return (...args) => new <em>constructorName</em>(...args); }
+           static factory(...args) { return new <em>constructorName</em>(...args); }
         </code> <br /><br />
         Since the constructor name varies per class, you would have to still add this function to each class.
     </p>
