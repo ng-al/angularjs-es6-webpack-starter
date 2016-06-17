@@ -1,20 +1,38 @@
 // Copyright (c) Alvin Pivowar 2016
 
+const FACTORY_FUNCTION_SYMBOL = Symbol();
+
 const injectForES6 = constructorOrArray =>  {
     if (!constructorOrArray) throw new Error("injectForES6: argument is required.");
 
-    // An injection array was passed in.
-    if (Array.isArray(constructorOrArray)) {
-        let inject = constructorOrArray;
+    const addFactoryToInjectionArray = (inject, constructor) => {
+        inject = inject || [];
         let length = inject.length;
-        const constructor = inject[length - 1];
-        if (!constructor.name)
-            return inject;
+        let currentFunction = (length && typeof(inject[length - 1]) === "function") ? inject[length - 1] : undefined;
+        if (currentFunction) {
+            if (!!Object.getOwnPropertySymbols(currentFunction).find(s => s === FACTORY_FUNCTION_SYMBOL))
+                return inject;
 
-        inject.splice(-1, 1);
-        inject.push((...args) => new constructor(...args));
+            inject.splice(-1, 1);
+            inject.push(buildFactoryFunction(currentFunction));
+            return inject;
+        }
+
+        if (!constructor) throw new Error("injectForES6: Unable to add factory function; constructor is unknown.");
+
+        inject.push(buildFactoryFunction(constructor));
         return inject;
-    }
+    };
+
+    const buildFactoryFunction = constructor => {
+        let factoryFn = (...args) => new constructor(...args);
+        factoryFn[FACTORY_FUNCTION_SYMBOL] = true;
+        return factoryFn;
+    };
+
+    // An injection array was passed in.
+    if (Array.isArray(constructorOrArray))
+        return addFactoryToInjectionArray(constructorOrArray);
 
     // A class was passed in.
     if (typeof(constructorOrArray) === "function") {
@@ -22,12 +40,7 @@ const injectForES6 = constructorOrArray =>  {
         if (constructor.length && !constructor.$inject)
             throw new Error(`Unable to find $inject on ${constructor.name}.  Did you forget @ngInject?`);
 
-        const inject = constructor.$inject || [];
-        let length = inject.length;
-        if (!length || typeof(inject[length - 1]) !== "function")
-            inject.push((...args) => new constructor(...args));
-
-        return inject;
+        return addFactoryToInjectionArray(constructor.$inject, constructor);
     }
 
     throw new Error("injectForES6: Unrecognized argument; must be injection array or class.");
