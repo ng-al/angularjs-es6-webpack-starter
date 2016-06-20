@@ -13,7 +13,7 @@ const injectForES6 = constructorOrArray =>  {
             if (!!Object.getOwnPropertySymbols(currentFunction).find(s => s === FACTORY_FUNCTION_SYMBOL))
                 return inject;
 
-            inject.splice(-1, 1);
+            inject = inject.splice(-1, 1);
             inject.push(buildFactoryFunction(currentFunction));
             return inject;
         }
@@ -45,6 +45,34 @@ const injectForES6 = constructorOrArray =>  {
 
     throw new Error("injectForES6: Unrecognized argument; must be injection array or class.");
 };
+
+class base {
+    constructor(...args) {
+        console.log("in base");
+    }
+
+    static m(derivedClass) {
+        console.log("in m: " + derivedClass.name);
+    }
+}
+
+class derived extends base {
+    constructor() {
+        super(arguments);
+    }
+
+    static m() {
+        base.m(this);
+    }
+}
+
+class user extends derived {
+    constructor() {
+        super(arguments);
+    }
+}
+
+user.m();
 
 export {
     injectForES6
