@@ -13,7 +13,7 @@ const injectForES6 = constructorOrArray =>  {
             if (!!Object.getOwnPropertySymbols(currentFunction).find(s => s === FACTORY_FUNCTION_SYMBOL))
                 return inject;
 
-            inject = inject.splice(-1, 1);
+            inject.pop();
             inject.push(buildFactoryFunction(currentFunction));
             return inject;
         }
