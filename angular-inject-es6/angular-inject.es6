@@ -1,4 +1,5 @@
 // Copyright (c) Alvin Pivowar 2016
+
 (function(global) {
 
     const FACTORY_FUNCTION_SYMBOL = Symbol();
