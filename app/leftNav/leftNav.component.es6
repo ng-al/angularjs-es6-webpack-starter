@@ -1,7 +1,6 @@
 // Copyright (c) Alvin Pivowar 2016
 
 import module from "./leftNav.module.es6";
-import {injectForES6} from "../common.es6";
 
 
 class LeftNavController {

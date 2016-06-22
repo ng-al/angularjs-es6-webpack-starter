@@ -2,7 +2,6 @@
 
 import theApp from "../../main/main.module.es6";
 import HomeModalController from "./home.modal.controller.es6";
-import {injectForES6} from "../../common.es6";
 
 class HomeController {
     /*@ngInject*/

@@ -1,7 +1,6 @@
 // Copyright (c) Alvin Pivowar 2016
 
 import theApp from "./main.module.es6";
-import {injectForES6} from "../common.es6";
 
 class RoutingConfig {
     /*@ngInject*/

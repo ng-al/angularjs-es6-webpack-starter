@@ -2,7 +2,6 @@
 
 import theApp from "./main.module.es6";
 import RoutingItem from "./routingItem.model.es6";
-import {injectForES6} from "../common.es6";
 
 
 let index = 0;
